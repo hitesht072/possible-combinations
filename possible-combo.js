@@ -23,15 +23,15 @@ function combination(encodeMsg) {
     }
 }
 
-function findCombination(s, current) {
-    if (s.length == 0) {
+function findCombination(str, current) {
+    if (str.length == 0) {
         resultsCombination.push(current);
         return;
     }
 
     Object.entries(alphabetMapping).forEach(([key, val]) => {
-        if (s.startsWith(key)) {
-            findCombination(s.substring(key.length), current + val, resultsCombination);
+        if (str.startsWith(key)) {
+            findCombination(str.substring(key.length), current + val, resultsCombination);
         }
     });
 }
