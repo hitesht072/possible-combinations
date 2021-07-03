@@ -1,40 +1,42 @@
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-  var alphabetMapping = {};
-  for (var i = 0; i < alphabet.length; i++) {
+var alphabetMapping = {};
+for (var i = 0; i < alphabet.length; i++) {
     alphabetMapping[i + 1] = alphabet[i];
-  }
+}
 
 var resultsCombination = [];
+
 function combination(encodeMsg) {
-	if (encodeMsg.length == 1) {
-		return 1;
-	} else {
-		var res = [];
-		res[0] = 1;
-		
-		for (var n = 1; n < encodeMsg.length; n++) {
-		  findComb(encodeMsg, "");
-			var condition = (parseInt(encodeMsg.slice(-2)) <= 26) ? 1 : 0;
-			res[n] = res[n-1] + condition;
-		}
-		return res[encodeMsg.length - 1];
-	}
+    if (encodeMsg.length == 1) {
+        findComb(encodeMsg, "");
+        return 1;
+    } else {
+        var res = [];
+        res[0] = 1;
+        for (var n = 1; n < encodeMsg.length; n++) {
+            var condition = (parseInt(encodeMsg.slice(-2)) <= 26) ? 1 : 0;
+            res[n] = res[n - 1] + condition;
+        }
+        findComb(encodeMsg, "");
+        return res[encodeMsg.length - 1];
+    }
+
 }
 
 function findComb(s, current) {
     if (s.length == 0) {
-      resultsCombination.push(current);
-      return;
+        resultsCombination.push(current);
+        return;
     }
-
     Object.entries(alphabetMapping).forEach(([key, val]) => {
-      if (s.startsWith(key)) {
-        findComb(s.substring(key.length), current + val, resultsCombination);
-      }
+        if (s.startsWith(key)) {
+            findComb(s.substring(key.length), current + val, resultsCombination);
+        }
     });
 }
 
 
-console.log('Total Combinations: ' + combination('12'));
-console.log('Combinations is/are: ');console.log(resultsCombination);
+console.log('Total Combinations: ' + combination('1'));
+console.log('Combinations is/are: ');
+console.log(resultsCombination);
