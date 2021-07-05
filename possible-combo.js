@@ -8,6 +8,8 @@ for (var i = 0; i < alphabet.length; i++) {
 var resultsCombination = [];
 
 function combination(encodeMsg) {
+    findCombination(encodeMsg, "");
+    
     if (encodeMsg.length == 1) {
         return 1;
     } else {
@@ -15,7 +17,6 @@ function combination(encodeMsg) {
         res[0] = 1;
 
         for (var n = 1; n < encodeMsg.length; n++) {
-            findCombination(encodeMsg, "");
             var condition = (parseInt(encodeMsg.slice(-2)) <= 26) ? 1 : 0;
             res[n] = res[n - 1] + condition;
         }
